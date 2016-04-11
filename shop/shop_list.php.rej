@@ -1,0 +1,77 @@
+diff a/shop/shop_list.php b/shop/shop_list.php	(rejected hunks)
+@@ -0,0 +1,74 @@
++<?php
++session_start();
++session_regenerate_id(true);
++if (isset($_SESSION['member_login']) == false)
++{
++	print 'ã‚ˆã†ã“ãã‚²ã‚¹ãƒˆæ§˜ã€€';
++	print '<a href="member_login.html">ä¼šå“¡ãƒ­ã‚°ã‚¤ãƒ³</a><br />';
++	print '<br />';
++}
++else
++{
++	print 'ã‚ˆã†ã“ã';
++	print $_SESSION['member_name'];
++	print ' æ§˜ã€€';
++	print '<a href="member_logout.php">ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ</a><br />';
++	print '<br />';
++}
++?>
++
++<!DOCTYPE html>
++<html>
++<head>
++<meta charset="UTF-8">
++<title>ãƒ¦ãƒ“ãƒ¼ãƒãƒƒãƒˆ</title>
++</head>
++<body>
++
++<?php
++
++try
++{
++
++$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
++$user = 'root';
++$password = '';
++$dbh = new PDO($dsn,$user,$password);
++$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
++
++$sql = 'SELECT code,name,price FROM mst_product WHERE 1';
++$stmt = $dbh->prepare($sql);
++$stmt->execute();
++
++$dbh = null;
++
++print 'å•†å“ä¸€è¦§<br /><br />';
++
++while (true)
++{
++	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
++	if ($rec == false)
++	{
++		break;
++	}
++	print '<a href="shop_product.php?procode='.$rec['code'].'">';
++	print $rec['name'].'---';
++	print $rec['price'].'å††';
++	print '</a>';
++	print '<br />';
++}
++
++print '<br />';
++print '<a href="shop_cartlook.php">ã‚«ãƒ¼ãƒˆã‚’è¦‹ã‚‹</a><br />';
++
++}
++catch (Exception $e)
++{
++	 print 'ãŸã ã„ã¾éšœå®³ã«ã‚ˆã‚Šå¤§å¤‰ã”è¿·æƒ‘ã‚’ãŠæŽ›ã‘ã—ã¦ãŠã‚Šã¾ã™ã€‚';
++	 exit();
++}
++
++?>
++
++</body>
++</html>
+\ No newline at end of file
