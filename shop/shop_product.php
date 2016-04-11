@@ -1,20 +1,6 @@
 <?php
 session_start();
 session_regenerate_id(true);
-if (isset($_SESSION['member_login']) == false)
-{
-	print 'ようこそゲスト様　';
-	print '<a href="member_login.html">会員ログイン</a><br />';
-	print '<br />';
-}
-else
-{
-	print 'ようこそ';
-	print $_SESSION['member_name'];
-	print '様　';
-	print '<a href="member_logout.php">ログアウト</a><br />';
-	print '<br />';
-}
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +10,29 @@ else
 <title>ユビーネット</title>
 </head>
 <body>
+
+<div>
+	<img src="img/logo-rigee.png">
+	<input type="button" value="top">
+	<input type="text" value="現在のカートの状況0">
+	<input type="button" value="カートを見る">
+	<?php
+		if (isset($_SESSION['member_login']) == false)
+		{
+			print 'ようこそゲスト様　';
+			print '<a href="member_login.html">会員ログイン</a><br />';
+			print '<br />';
+		}
+		else
+		{
+			print 'ようこそ';
+			print $_SESSION['member_name'];
+			print '様　';
+			print '<a href="member_logout.php">ログアウト</a><br />';
+			print '<br />';
+		}
+	?>
+</div>
 
 <?php
 
@@ -69,23 +78,25 @@ catch(Exception $e)
 
 ?>
 
-商品情報参照<br />
-<br />
-商品コード<br />
-<?php print $pro_code; ?>
-<br />
-商品名<br />
-<?php print $pro_name; ?>
-<br />
-価格<br />
-<?php print $pro_price; ?>円
-<br />
-<?php print $disp_gazou; ?>
+
+<h1>商品情報</h1>
 <br />
 <br />
-<form>
-<input type="button" onclick="history.back()" value="戻る">
-</form>
+<img src="img/bm01.jpg">
+
+
+商品名
+<?php print 商品の名前; ?>
+
+型番
+
+価格
+
+サイズ
+
+特徴
+
+カートに入れるボタン
 
 </body>
 </html>
