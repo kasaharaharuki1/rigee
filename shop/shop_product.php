@@ -34,28 +34,55 @@ session_regenerate_id(true);
 	?>
 </div>
 
+<h1>商品情報</h1>
+<br />
+<br />
+
+
 <?php
 
 try
 {
 
 $pro_code = $_GET['procode'];
+$special_price = $_GET['specialprice'];
 
-$dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
+$dsn = 'mysql:dbname=rigee;host=localhost;charset=utf8';
 $user = 'root';
 $password = '';
 $dbh = new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-$sql = 'SELECT name,price,gazou FROM mst_product WHERE code=?';
-$stmt = $dbh->prepare($sql);
-$data[] = $pro_code;
-$stmt->execute($data);
+if($special_price == "0")
+{
+	$sql = 'SELECT name,price,gazou,model_code,tokutyo,size FROM mst_product WHERE code=?';
+	$stmt = $dbh->prepare($sql);
+	$data[] = $pro_code;
+	$stmt->execute($data);
 
-$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-$pro_name = $rec['name'];
-$pro_price = $rec['price'];
-$pro_gazou_name = $rec['gazou'];
+	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+	$pro_name = $rec['name'];
+	$pro_price = $rec['price'];
+	$pro_gazou_name = $rec['gazou'];
+	$pro_model_code = $rec['model_code'];
+	$pro_tokutyo = $rec['tokutyo'];
+	$pro_size = $rec['size'];
+}
+else
+{
+	$sql = 'SELECT name,special_price,gazou,model_code,tokutyo,size FROM mst_product WHERE code=?';
+	$stmt = $dbh->prepare($sql);
+	$data[] = $pro_code;
+	$stmt->execute($data);
+
+	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+	$pro_name = $rec['name'];
+	$pro_special_price = $rec['special_price'];
+	$pro_gazou_name = $rec['gazou'];
+	$pro_model_code = $rec['model_code'];
+	$pro_tokutyo = $rec['tokutyo'];
+	$pro_size = $rec['size'];
+}
 
 $dbh = null;
 
@@ -65,7 +92,7 @@ if ($pro_gazou_name == '')
 }
 else
 {
-	$disp_gazou='<img src="../product/gazou/'.$pro_gazou_name.'">';
+	$disp_gazou='<img src="img/'.$pro_gazou_name.'">';
 }
 print '<a href="shop_cartin.php?procode='.$pro_code.'">カートに入れる</a><br /><br />';
 
@@ -77,26 +104,28 @@ catch(Exception $e)
 }
 
 ?>
-
-
-<h1>商品情報</h1>
+<?php print $disp_gazou; ?>
 <br />
 <br />
-<img src="img/bm01.jpg">
-
-
-商品名
-<?php print 商品の名前; ?>
-
-型番
-
-価格
-
-サイズ
-
-特徴
-
-カートに入れるボタン
-
+<div>
+	商品名<br />
+	<?php print $pro_name; ?>
+	<br />
+	<br />
+	型番<br />
+	<?php print $pro_model_code; ?>
+	<br />
+	<br />
+	価格<br />
+	<?php if($special_price == "0"){print $pro_price;}else{print $pro_special_price;} ?>
+	<br />
+	<br />
+	サイズ<br />
+	<?php print $pro_size; ?>
+	<br />
+	<br />
+	特徴<br />
+	<?php print $pro_tokutyo; ?>
+</div>
 </body>
 </html>
