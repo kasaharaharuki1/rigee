@@ -1,20 +1,6 @@
 <?php
 session_start();
 session_regenerate_id(true);
-if(isset($_SESSION['member_login'])==false)
-{
-	print 'ようこそゲスト様　';
-	print '<a href="member_login.html">会員ログイン</a><br />';
-	print '<br />';
-}
-else
-{
-	print 'ようこそ';
-	print $_SESSION['member_name'];
-	print '様　';
-	print '<a href="member_logout.php">ログアウト</a><br />';
-	print '<br />';
-}
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +10,29 @@ else
 <title>ユビーネット</title>
 </head>
 <body>
+
+<div>
+	<img src="img/logo-rigee.png">
+	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
+	<input type="text" value="現在のカートの状況0">
+	<input type="button" value="カートを見る" onclick="location.href='shop_cartlook.php'">
+	<?php
+		if (isset($_SESSION['member_login']) == false)
+		{
+			print 'ようこそゲスト様　';
+			print '<a href="member_login.html">会員ログイン</a><br />';
+			print '<br />';
+		}
+		else
+		{
+			print 'ようこそ';
+			print $_SESSION['member_name'];
+			print '様　';
+			print '<a href="member_logout.php">ログアウト</a><br />';
+			print '<br />';
+		}
+	?>
+</div>
 
 <?php
 
@@ -49,7 +58,7 @@ if($max==0)
 	exit();
 }
 
-$dsn='mysql:dbname=shop;host=localhost;charset=utf8';
+$dsn='mysql:dbname=rigee;host=localhost;charset=utf8';
 $user='root';
 $password='';
 $dbh=new PDO($dsn,$user,$password);
@@ -57,24 +66,28 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 foreach($cart as $key=>$val)
 {
-	$sql='SELECT code,name,price,gazou FROM mst_product WHERE code=?';
+	$sql='SELECT name,price,special_price,gazou,model_code,tokutyo,size FROM mst_product WHERE code=?';
 	$stmt=$dbh->prepare($sql);
 	$data[0]=$val;
 	$stmt->execute($data);
 
 	$rec=$stmt->fetch(PDO::FETCH_ASSOC);
 
-	$pro_name[]=$rec['name'];
-	$pro_price[]=$rec['price'];
 	if($rec['gazou']=='')
 	{
 		$pro_gazou[]='';
 	}
 	else
 	{
-		$pro_gazou[]='<img src="../product/gazou/'.$rec['gazou'].'">';
+		$pro_gazou[]='<img src="img/'.$rec['gazou'].'">';
 	}
+	$pro_name[]=$rec['name'];
+	$pro_price[]=$rec['price'];
+	$pro_model_code[]=$rec['model_code'];
+	$pro_size[]=$rec['size'];
+	$pro_tokutyo[]=$rec['tokutyo'];
 }
+
 $dbh=null;
 
 }
@@ -90,8 +103,11 @@ catch(Exception $e)
 <br />
 <table border="1">
 <tr>
-<td>商品</td>
 <td>商品画像</td>
+<td>商品名</td>
+<td>型番</td>
+<td>サイズ</td>
+<td>特徴</td>
 <td>価格</td>
 <td>数量</td>
 <td>小計</td>
@@ -102,8 +118,11 @@ catch(Exception $e)
 	{
 ?>
 <tr>
-	<td><?php print $pro_name[$i]; ?></td>
 	<td><?php print $pro_gazou[$i]; ?></td>
+	<td><?php print $pro_name[$i]; ?></td>
+	<td><?php print $pro_model_code[$i]; ?></td>
+	<td><?php print $pro_size[$i]; ?></td>
+	<td><?php print $pro_tokutyo[$i]; ?></td>
 	<td><?php print $pro_price[$i]; ?>円</td>
 	<td><input type="text" name="kazu<?php print $i; ?>" value="<?php print $kazu[$i]; ?>"></td>
 	<td><?php print $pro_price[$i]*$kazu[$i]; ?>円</td>

@@ -13,9 +13,9 @@ session_regenerate_id(true);
 
 <div>
 	<img src="img/logo-rigee.png">
-	<input type="button" value="top">
+	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
 	<input type="text" value="現在のカートの状況0">
-	<input type="button" value="カートを見る">
+	<input type="button" value="カートを見る" onclick="location.href='shop_cartlook.php'">
 	<?php
 		if (isset($_SESSION['member_login']) == false)
 		{
@@ -33,11 +33,6 @@ session_regenerate_id(true);
 		}
 	?>
 </div>
-
-<h1>商品情報</h1>
-<br />
-<br />
-
 
 <?php
 
@@ -94,8 +89,8 @@ else
 {
 	$disp_gazou='<img src="img/'.$pro_gazou_name.'">';
 }
+print "<h1>商品情報</h1>";
 print '<a href="shop_cartin.php?procode='.$pro_code.'">カートに入れる</a><br /><br />';
-
 }
 catch(Exception $e)
 {
@@ -104,6 +99,7 @@ catch(Exception $e)
 }
 
 ?>
+
 <?php print $disp_gazou; ?>
 <br />
 <br />
@@ -127,5 +123,6 @@ catch(Exception $e)
 	特徴<br />
 	<?php print $pro_tokutyo; ?>
 </div>
+
 </body>
 </html>

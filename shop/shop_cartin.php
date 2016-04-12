@@ -1,20 +1,6 @@
 <?php
 session_start();
 session_regenerate_id(true);
-if (isset($_SESSION['member_login']) == false)
-{
-	print 'ようこそゲスト様　';
-	print '<a href="member_login.html">会員ログイン</a><br />';
-	print '<br />';
-}
-else
-{
-	print 'ようこそ';
-	print $_SESSION['member_name'];
-	print '様　';
-	print '<a href="member_logout.php">ログアウト</a><br />';
-	print '<br />';
-}
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +10,29 @@ else
 <title>ユビーネット</title>
 </head>
 <body>
+
+<div>
+	<img src="img/logo-rigee.png">
+	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
+	<input type="text" value="現在のカートの状況0">
+	<input type="button" value="カートを見る" onclick="location.href='shop_cartlook.php'">
+	<?php
+		if (isset($_SESSION['member_login']) == false)
+		{
+			print 'ようこそゲスト様　';
+			print '<a href="member_login.html">会員ログイン</a><br />';
+			print '<br />';
+		}
+		else
+		{
+			print 'ようこそ';
+			print $_SESSION['member_name'];
+			print '様　';
+			print '<a href="member_logout.php">ログアウト</a><br />';
+			print '<br />';
+		}
+	?>
+</div>
 
 <?php
 
@@ -45,8 +54,6 @@ if (isset($_SESSION['cart']) == true)
 }
 $cart[] = $pro_code;
 $kazu[] = 1;
-var_dump($cart);
-var_dump($kazu);
 $_SESSION['cart'] = $cart;
 $_SESSION['kazu'] = $kazu;
 

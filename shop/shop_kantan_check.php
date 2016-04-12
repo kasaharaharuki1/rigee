@@ -20,7 +20,7 @@ if(isset($_SESSION['member_login'])==false)
 <?php
 $code=$_SESSION['member_code'];
 
-$dsn='mysql:dbname=shop;host=localhost;charset=utf8';
+$dsn='mysql:dbname=rigee;host=localhost;charset=utf8';
 $user='root';
 $password='';
 $dbh=new PDO($dsn,$user,$password);
