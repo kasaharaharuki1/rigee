@@ -11,7 +11,7 @@ $member_pass=$post['pass'];
 
 $member_pass=md5($member_pass);
 
-$dsn='mysql:dbname=shop;host=localhost;charset=utf8';
+$dsn='mysql:dbname=rigee;host=localhost;charset=utf8';
 $user='root';
 $password='';
 $dbh=new PDO($dsn,$user,$password);
