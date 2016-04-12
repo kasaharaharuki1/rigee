@@ -56,6 +56,7 @@ $cart[] = $pro_code;
 $kazu[] = 1;
 $_SESSION['cart'] = $cart;
 $_SESSION['kazu'] = $kazu;
+$_SESSION['cartkazu'] += 1;
 
 }
 catch(Exception $e)
