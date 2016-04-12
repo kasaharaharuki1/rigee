@@ -15,7 +15,7 @@ $cartkazu = isset($_SESSION['cartkazu']) ? $_SESSION['cartkazu'] : "0";
 <div>
 	<img src="img/logo-rigee.png">
 	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
-	<input type="text" value="現在のカート:<?php print $_SESSION['cartkazu']; ?>" readonly="readonly">
+	<input type="text" value="現在のカート:<?php print $cartkazu; ?>" readonly="readonly">
 	<input type="button" value="カートを見る" onclick="location.href='shop_cartlook.php'">
 	<?php
 		if (isset($_SESSION['member_login']) == false)

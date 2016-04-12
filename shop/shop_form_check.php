@@ -6,6 +6,11 @@
 </head>
 <body>
 
+<div>
+	<img src="img/logo-rigee.png">
+	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
+</div>
+
 <?php
 
 require_once('../common/common.php');
