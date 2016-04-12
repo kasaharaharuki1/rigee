@@ -2,25 +2,27 @@
 <?php
 session_start();
 session_regenerate_id(true);
+$cartkazu = isset($_SESSION['cartkazu']) ? $_SESSION['cartkazu'] : "0";
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ユビーネット</title>
+</head>
+<body>
+
 <div>
 	<img src="img/logo-rigee.png">
-	<img src="img/logo-t.png">
-
-
-   <!--  <input type="image" src="img/nav04.png" alt="ログイン">-->
-<a href="#"><img src="img/nav04.png"></a>
-<button onClick="location.href='http://yahoo.co.jp'">ログアウト</button>
-
-
-
-
+	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
+	<input type="text" value="現在のカート:<?php print $_SESSION['cartkazu']; ?>" readonly="readonly">
+	<input type="button" value="カートを見る" onclick="location.href='shop_cartlook.php'">
 	<?php
-	print '<input type="submit" value="カートを見る" name="look"onclick="">';
 		if (isset($_SESSION['member_login']) == false)
 		{
 			print 'ようこそゲスト様　';
-
+			print '<a href="member_login.html">会員ログイン</a><br />';
 			print '<br />';
 		}
 		else
@@ -33,9 +35,8 @@ session_regenerate_id(true);
 		}
 	?>
 </div>
+
 <?php
-
-
 
 try
 {
@@ -45,8 +46,6 @@ $user = 'root';
 $password = '';
 $dbh = new PDO($dsn,$user,$password);
 $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-
 
 /*while (true)
 {
@@ -61,11 +60,6 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 /*print '<br />';
 print '<a href="shop_cartlook.php">カートを見る</a><br />';*/
 
-
-
-
-
-
 switch (date('w')) {
 	//日曜日
 	case 0:
@@ -77,18 +71,19 @@ switch (date('w')) {
 		$bike_name = $rec['name'];
 		print $bike_name;
 		//特価品
-		print '<a href="#"><img src="img/bm01.jpg"></a><br>';
+		print '<a href="shop_product.php?procode=1&specialprice=0"><img src="img/bm01.jpg"></a><br>';
+
 		print '今日の特価品';
 		print '<a href="shop_cartin.php?procode=1">カートに入れる</a><br /><br />';
 
 
 
-		print '<a href="#"><img src="img/bm02s.jpg"></a>';
-		print '<a href="#"><img src="img/bm03s.jpg"></a>';
-		print '<a href="#"><img src="img/bm04s.jpg"></a><br>';
-		print '<a href="#"><img src="img/bm05s.jpg"></a>';
-		print '<a href="#"><img src="img/bm06s.jpg"></a>';
-		print '<a href="#"><img src="img/bm07s.jpg"></a>';
+		print '<a href="shop_product.php?procode=1&specialprice=1"><img src="img/bm02s.jpg"></a>';
+		print '<a href="shop_product.php?procode=1&specialprice=1"><img src="img/bm03s.jpg"></a>';
+		print '<a href="shop_product.php?procode=1&specialprice=1"><img src="img/bm04s.jpg"></a><br>';
+		print '<a href="shop_product.php?procode=1&specialprice=1"><img src="img/bm05s.jpg"></a>';
+		print '<a href="shop_product.php?procode=1&specialprice=1"><img src="img/bm06s.jpg"></a>';
+		print '<a href="shop_product.php?procode=1&specialprice=1"><img src="img/bm07s.jpg"></a>';
 
 		break;
 	case 1:
@@ -100,15 +95,15 @@ switch (date('w')) {
 		$bike_name = $rec['name'];
 		print $bike_name;
 		//特価品
-		print '<a href="#"><img src="img/bm01.jpg"></a><br>';
+		print '<a href="shop_product.php?procode=2&specialprice=0"><img src="img/bm01.jpg"></a><br>';
 		print '今日の特価品';
-		print '<a href="#"><img src="img/bm02.jpg"></a><br>';
-		print '<a href="#"><img src="img/bm03s.jpg"></a>';
-		print '<a href="#"><img src="img/bm04s.jpg"></a>';
-		print '<a href="#"><img src="img/bm05s.jpg"></a><br>';
-		print '<a href="#"><img src="img/bm06s.jpg"></a>';
-		print '<a href="#"><img src="img/bm07s.jpg"></a>';
-		print '<a href="#"><img src="img/bm01s.jpg"></a>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm02.jpg"></a><br>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm03s.jpg"></a>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm04s.jpg"></a>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm05s.jpg"></a><br>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm06s.jpg"></a>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm07s.jpg"></a>';
+		print '<a href="shop_product.php?procode=2&specialprice=1"><img src="img/bm01s.jpg"></a>';
 		break;
 	case 2:
 		//火曜日　テスト
@@ -120,23 +115,26 @@ switch (date('w')) {
 
 
 		//特価品
-		print '<a href="#"><img src="img/bm03.jpg"></a>';
+		print '<a href="shop_product.php?procode=3&specialprice=1"><img src="img/bm03.jpg"></a>';
 
 
-		print '今日の特価品<br>';
+		print '<div>今日の特価品<br>';
+		print "<br>";
 		print $rec['name'];
 		print '<br>';
 		print $rec['tokutyo'];
-		//print "<br>";
-		echo $rec['special_price'], "円（税抜き）";
-		print '<a href="shop_cartin.php?procode=1">カートに入れる</a><br /><br />';
 		print "<br>";
-		print '<a href="#"><img src="img/bm04s.jpg"></a>';
-		print '<a href="#"><img src="img/bm05s.jpg"></a>';
-		print '<a href="#"><img src="img/bm06s.jpg"></a><br>';
-		print '<a href="#"><img src="img/bm07s.jpg"></a>';
-		print '<a href="#"><img src="img/bm01s.jpg"></a>';
-		print '<a href="#"><img src="img/bm02s.jpg"></a>';
+		echo $rec['special_price'], "円（税抜き）";
+		print "<br>";
+		print '<a href="shop_cartin.php?procode=3">カートに入れる</a><div><br />';
+
+		print "<br>";
+		print '<a href="shop_product.php?procode=4&specialprice=0"><img src="img/bm04s.jpg"></a>';
+		print '<a href="shop_product.php?procode=5&specialprice=0"><img src="img/bm05s.jpg"></a>';
+		print '<a href="shop_product.php?procode=6&specialprice=0"><img src="img/bm06s.jpg"></a><br>';
+		print '<a href="shop_product.php?procode=7&specialprice=0"><img src="img/bm07s.jpg"></a>';
+		print '<a href="shop_product.php?procode=1&specialprice=0"><img src="img/bm01s.jpg"></a>';
+		print '<a href="shop_product.php?procode=2&specialprice=0"><img src="img/bm02s.jpg"></a>';
 		break;
 	case 3:
 		print '<a href="#"><img src="img/bm04.jpg"></a>';
@@ -184,22 +182,7 @@ $dbh = null;
 	exit();
 }
 
-
-
 ?>
-
-
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ユビーネット</title>
-</head>
-<body>
-
 
 </body>
 </html>

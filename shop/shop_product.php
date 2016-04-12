@@ -101,10 +101,8 @@ catch(Exception $e)
 
 ?>
 
-<?php print $disp_gazou; ?>
-<br />
-<br />
 <div>
+	<?php print $disp_gazou; ?><br />
 	商品名<br />
 	<?php print $pro_name; ?>
 	<br />
