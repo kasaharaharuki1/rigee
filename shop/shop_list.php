@@ -9,6 +9,7 @@ $cartkazu = isset($_SESSION['cartkazu']) ? $_SESSION['cartkazu'] : "0";
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="./css/shop_header_css.css">
+<link rel="stylesheet" type="text/css" href="./css/shop_list_css.css">
 <title>ユビーネット</title>
 </head>
 <body>
@@ -69,12 +70,12 @@ for ($i=0; $i <= $data_cnt; $i++)
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		print '<a href="shop_product.php?procode=' .$week .'&specialprice=1"><img src="img/bm0' .$week .'.jpg"></a>';
-		print '<div><h1>今日の特価品</h1><br>';
-		print '<h2>'.$rec["name"] .'</h2><br>';
-		print $rec['tokutyo'].'<br>';
-		echo $rec["special_price"], '円（税抜き）';
-		print '<br><input type="button" value="カートに入れる" onclick="location.href=\'shop_cartin.php?procode='.$week .'\'"></div><br />';
+		print '<div id="main_contents"><a href="shop_product.php?procode=' .$week .'&specialprice=1"><img src="img/bm0' .$week .'.jpg"></a>';
+		print '<div><span>今日の特価品</span><br><br>';
+		print '<span>'.$rec["name"] .'</span><br><br>';
+		print $rec['tokutyo'].'<br><br>';
+		echo $rec["special_price"], '円（税抜き）<br>';
+		print '<br><input type="button" value="カートに入れる" onclick="location.href=\'shop_cartin.php?procode='.$week .'\'"></div></div><br />';
 	}
 	else if($i == $week)
 	{
