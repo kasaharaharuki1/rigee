@@ -8,31 +8,33 @@ $cartkazu = isset($_SESSION['cartkazu']) ? $_SESSION['cartkazu'] : "0";
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/shop_header_css.css">
 <title>ユビーネット</title>
 </head>
 <body>
 
-<div>
-	<img src="img/logo-rigee.png">
+<div id="header">
+	<div id="header_contents">
+	<input type="image" src="img/logo-rigee.png">
+	<input type="image" src="img/logo-t.png">
 	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
-	<input type="text" value="現在のカート:<?php print $cartkazu; ?>" readonly="readonly">
 	<input type="button" value="カートを見る" onclick="location.href='shop_cartlook.php'">
+	<input type="text" value="現在のカート:<?php print $cartkazu; ?>" readonly="readonly">
 	<?php
 		if (isset($_SESSION['member_login']) == false)
 		{
-			print 'ようこそゲスト様　';
-			print '<a href="member_login.html">会員ログイン</a><br />';
-			print '<br />';
+			print '<div>ようこそゲスト様　';
+			print '<a href="member_login.html">会員ログイン</a></div>';
 		}
 		else
 		{
-			print 'ようこそ';
+			print '<div>ようこそ';
 			print $_SESSION['member_name'];
 			print '様　';
-			print '<a href="member_logout.php">ログアウト</a><br />';
-			print '<br />';
+			print '<a href="member_logout.php">ログアウト</a></div>';
 		}
 	?>
+	</div>
 </div>
 
 <?php

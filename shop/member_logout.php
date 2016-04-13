@@ -12,9 +12,17 @@ session_destroy();
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./css/shop_header_css.css">
 <title>ユビーネット</title>
 </head>
 <body>
+<div id="header">
+	<div id="header_contents">
+	<input type="image" src="img/logo-rigee.png">
+	<input type="image" src="img/logo-t.png">
+	<input type="image" src="img/nav01.png" onclick="location.href='shop_list.php'">
+	</div>
+</div>
 
 ログアウトしました。<br />
 <br />
