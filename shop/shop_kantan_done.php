@@ -49,10 +49,10 @@ $postal1=$post['postal1'];
 $postal2=$post['postal2'];
 $address=$post['address'];
 $tel=$post['tel'];
-$chumon=$post['chumon'];
-$pass=$post['pass'];
-$danjo=$post['danjo'];
-$birth=$post['birth'];
+$chumon=isset($post['chumon']) ? $post['chumon'] : NULL;
+$pass=isset($post['pass']) ? $post['pass'] : NULL;
+$danjo=isset($post['danjo']) ? $post['danjo'] : NULL;
+$birth=isset($post['birth']) ? $post['birth'] : NULL;
 
 print $onamae.'様<br />';
 print 'ご注文ありがとうござました。<br />';
