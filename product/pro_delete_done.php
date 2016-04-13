@@ -29,7 +29,7 @@ $dbh=null;
 
 if($pro_gazou_name!='')
 {
-	unlink('./gazou/'.$pro_gazou_name);
+	unlink('../shop/img/'.$pro_gazou_name);
 }
 
 }

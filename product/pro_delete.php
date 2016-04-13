@@ -26,6 +26,7 @@ $stmt->execute($data);
 
 $rec=$stmt->fetch(PDO::FETCH_ASSOC);
 $pro_name=$rec['name'];
+
 $pro_gazou_name=$rec['gazou'];
 
 $dbh=null;
@@ -36,7 +37,7 @@ if($pro_gazou_name=='')
 }
 else
 {
-	$disp_gazou='<img src="./gazou/'.$pro_gazou_name.'">';
+	$disp_gazou='<img src="../shop/img/'.$pro_gazou_name.'">';
 }
 
 }
@@ -56,6 +57,7 @@ catch(Exception $e)
 商品名<br />
 <?php print $pro_name; ?>
 <br />
+
 <?php print $disp_gazou; ?>
 <br />
 この商品を削除してよろしいですか？<br />
