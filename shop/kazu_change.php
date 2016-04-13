@@ -32,6 +32,7 @@
 		{
 			array_splice($cart,$i,1);
 			array_splice($kazu,$i,1);
+			$_SESSION['cartkazu'] -= 1;
 		}
 	}
 
