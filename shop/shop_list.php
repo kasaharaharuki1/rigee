@@ -75,7 +75,7 @@ for ($i=0; $i <= $data_cnt; $i++)
 		print '<span>'.$rec["name"] .'</span><br><br>';
 		print $rec['tokutyo'].'<br><br>';
 		echo $rec["special_price"], '円（税抜き）<br>';
-		print '<br><input type="button" value="カートに入れる" onclick="location.href=\'shop_cartin.php?procode='.$week .'\'"></div></div><br />';
+		print '<br><input type="button" value="カートに入れる" onclick="location.href=\'shop_cartin.php?procode='.$week .'\'"></div></div>';
 	}
 	else if($i == $week)
 	{
@@ -102,6 +102,5 @@ $dbh = null;
 }
 
 ?>
-
 </body>
 </html>
